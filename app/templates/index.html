@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLIChat - Secure P2P Chat</title>
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #00c853 0%, #00a152 50%, #007c3e 100%);
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+            color: #00a152;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+        }
+        .input-glass {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .input-glass:focus {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+        .logo-circle {
+            background: linear-gradient(135deg, #ffffff 0%, #e8f5e9 100%);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4 sm:p-6">
+    <div class="w-full max-w-md mx-auto">
+        <div class="glass rounded-2xl sm:rounded-3xl p-6 sm:p-8 shadow-2xl">
+            <div class="text-center mb-6 sm:mb-8">
+                <div class="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full logo-circle mb-3 sm:mb-4">
+                    <img src="/static/favicon.ico" alt="MliChat Logo" class="w-10 h-10 sm:w-12 sm:h-12">
+                </div>
+                <h1 class="text-2xl sm:text-3xl font-bold text-white mb-2">MLIChat</h1>
+                <p class="text-white/80 text-sm sm:text-base">Aplikasi Chat Real Time dengan Pesan Terenkripsi</p>
+            </div>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-white/90 text-sm font-medium mb-2">Nama Lengkap Anda</label>
+                    <input type="text" id="displayName" placeholder="Enter your name" 
+                        class="w-full px-4 py-3 rounded-xl input-glass text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition text-base">
+                </div>
+
+                <div class="pt-2 sm:pt-4">
+                    <button id="createRoomBtn" 
+                        class="w-full py-3 px-6 rounded-xl btn-primary font-semibold transition transform hover:scale-[1.02] active:scale-[0.98] shadow-lg">
+                        <span class="flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                            </svg>
+                            Buat Room Baru
+                        </span>
+                    </button>
+                </div>
+
+                <div class="relative py-3 sm:py-4">
+                    <div class="absolute inset-0 flex items-center">
+                        <div class="w-full border-t border-white/30"></div>
+                    </div>
+                    <div class="relative flex justify-center">
+                        <span class="px-4 text-white/70 text-sm bg-transparent">atau bergabung dengan room yang sudah ada</span>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-white/90 text-sm font-medium mb-2">Kode Room</label>
+                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                        <input type="text" id="roomCode" placeholder="Masukkan kode room" 
+                            class="w-full sm:flex-1 px-4 py-3 rounded-xl input-glass text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50 transition text-base">
+                        <button id="joinRoomBtn" 
+                            class="w-full sm:w-auto px-6 py-3 rounded-xl bg-white/20 text-white font-semibold hover:bg-white/30 transition border border-white/30 flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                            </svg>
+                            <span>Join Room</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 sm:mt-8 pt-4 sm:pt-6 border-t border-white/20">
+                <div class="flex items-center justify-center gap-2 text-white/80 text-xs sm:text-sm">
+                    <svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                    </svg>
+                    <span>Terenkripsi End-to-end</span>
+                </div>
+            </div>
+        </div>
+
+        <p class="text-center text-white/60 text-xs sm:text-sm mt-4 sm:mt-6 px-4">
+            &copy; 2025 MLIChat. All rights reserved.
+        </p>
+    </div>
+
+    <script>
+        const displayNameInput = document.getElementById('displayName');
+        const roomCodeInput = document.getElementById('roomCode');
+        const createRoomBtn = document.getElementById('createRoomBtn');
+        const joinRoomBtn = document.getElementById('joinRoomBtn');
+
+        function getDisplayName() {
+            return displayNameInput.value.trim() || 'Anonymous';
+        }
+
+        createRoomBtn.addEventListener('click', async () => {
+            const response = await fetch('/api/room/create');
+            const data = await response.json();
+            const name = encodeURIComponent(getDisplayName());
+            window.location.href = `/room/${data.room_id}?name=${name}`;
+        });
+
+        joinRoomBtn.addEventListener('click', () => {
+            const roomCode = roomCodeInput.value.trim();
+            if (roomCode) {
+                const name = encodeURIComponent(getDisplayName());
+                window.location.href = `/room/${roomCode}?name=${name}`;
+            }
+        });
+
+        roomCodeInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                joinRoomBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>
