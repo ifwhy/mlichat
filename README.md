@@ -44,6 +44,7 @@
 
 Pesan yang dikirim antar pengguna dienkripsi di sisi client sebelum dikirim ke server, dan hanya dapat didekripsi oleh penerima yang berada di room yang sama. Server hanya bertindak sebagai relay dan tidak dapat membaca isi pesan.
 
+> Video Dokumentasi Dapat Diakses [di sini](https://youtu.be/-zOa1pKPReQ).
 ---
 
 ## Fitur
